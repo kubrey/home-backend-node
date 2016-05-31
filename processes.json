@@ -1,0 +1,8 @@
+[
+  {
+    "script": "app.js",
+    "name": "main handler",
+    "exec_mode": "cluster",
+    "instances": 2
+  }
+]

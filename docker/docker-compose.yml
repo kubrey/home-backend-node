@@ -1,21 +1,22 @@
 nginx:
-    build: ./nginx
+    build: ./nginx/
     ports:
         - "8080:80"
         - "8443:443"
     volumes:
         - /etc/nginx/psw:/etc/nginx/pws
         - /etc/nginx/ssl:/etc/nginx/ssl
+        - ./nginx/nginx.conf:/etc/nginx/conf.d/dock.loc
     environment:
-        - DOMAIN_NAME=homenode.loc
+        - DOMAIN_NAME=dock.loc
     links:
         - node
 node:
-    build: ./node
+    build: ./node/
     ports:
-        - "8800"
+        - "8800:80"
     volumes:
-        - ../:/var/www/homenode/data/www/homenode.loc
+        - ../:/app
     environment:
         MONGO_HOST: mongo
         MONGO_PORT: 27017

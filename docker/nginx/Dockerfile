@@ -2,8 +2,8 @@
 FROM nginx
 
 
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY entry.sh /
+ENTRYPOINT ["/entry.sh"]
 
 # Copy custom configuration file from the current directory
 COPY nginx.conf /etc/nginx/nginx.conf
