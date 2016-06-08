@@ -1,7 +1,7 @@
 FROM node:6.2
 
-RUN useradd --user-group --create-home --shell /bin/false app &&\
-  npm install --global npm
+RUN useradd --user-group --create-home --shell /bin/false app
+# RUN npm install -g npm
 
 ENV HOME=/home/app
 

@@ -1,0 +1,8 @@
+[
+  {
+    "script": "src/app.js",
+    "name": "main handler",
+    "exec_mode": "fork",
+    "instances": 1
+  }
+]

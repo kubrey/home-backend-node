@@ -1,4 +1,6 @@
 .idea
-/netbeans
+/nbproject
 *.log
 /docker/mongodb/*
+/node_modules/*
+/mongodb/
