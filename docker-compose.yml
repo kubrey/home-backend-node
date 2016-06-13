@@ -13,7 +13,6 @@
 #        - node
 
 node:
-#    image: kubrey/node-test-app
     build: .
     ports:
         - "8800:80"
@@ -26,12 +25,11 @@ node:
         MONGO_PORT: 37017
     links:
         - mongodb
-
 mongodb:
      image: mongo:3.0
      command: " --smallfiles --quiet --logpath=/dev/null"
      ports:
          - "37017:27017"
   #   command: chmod -R 0755 mongodb/journal
-#     volumes:
-#         - ./mongodb:/data/db
+     volumes:
+         - ./mongodb:/data/db
