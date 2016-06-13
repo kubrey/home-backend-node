@@ -3,6 +3,7 @@
     "script": "src/app.js",
     "name": "main handler",
     "exec_mode": "fork",
-    "instances": 1
+    "instances": 1,
+    "watch": ["src"]
   }
 ]
