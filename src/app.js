@@ -5,7 +5,7 @@ const path = require('path');
 const geo = require(path.join(__dirname, "libs/geo"));
 var conf = require(path.join(__dirname, "config"));
 const session = require('express-session');
-require(path.join(__dirname, "helpers"));
+const help = require(path.join(__dirname, "helpers"));
 
 var app = express();
 

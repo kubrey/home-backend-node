@@ -14,4 +14,74 @@ Date.prototype.ymd = function (separator) {
 };
 
 
+var fs = require('fs');
+
+var helper = function () {
+};
+
+/**
+ *
+ * @param dir
+ * @param files_
+ * @return {*|Array}
+ */
+helper.prototype.getFiles = function (dir, files_) {
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    if (!files) {
+        return files_;
+    }
+    for (var i in files) {
+        var name = dir + '/' + files[i];
+        if (fs.statSync(name).isDirectory()) {
+            self.getFiles(name, files_);
+        } else {
+            files_.push(name);
+        }
+    }
+    return files_;
+};
+
+/**
+ *
+ * @param request
+ * @return {*}
+ */
+helper.prototype.getIp = function (request) {
+    if (!request.connection) {
+        return null;
+    }
+    var socketIp = null;
+    if (request.connection.socket) {
+        if (request.connection.socket.remoteAddress) {
+            socketIp = request.connection.socket.remoteAddress;
+        }
+    }
+    return (req.headers['x-forwarded-for'] || '').split(',')[0] ||
+        request.connection.remoteAddress ||
+        request.socket.remoteAddress ||
+        socketIp;
+};
+
+/**
+ *
+ * @param cookie
+ * @return {{}}
+ */
+helper.prototype.getCookies = function (cookie) {
+    var list = {},
+        rc = cookie;
+
+    rc && rc.split(';').forEach(function (cookie) {
+        var parts = cookie.split('=');
+        list[parts.shift().trim()] = decodeURI(parts.join('='));
+    });
+
+    return list;
+};
+
+var Helper = new helper();
+
+module.exports = Helper;
+
 
