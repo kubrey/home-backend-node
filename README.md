@@ -1,6 +1,8 @@
 # Smart home app on microservices
 
- 1. `docker build -t kubrey/node-test-app .`
+In project root:
+
+ 1. `docker-compose build`
  
  2. `docker-compose up -d`
  

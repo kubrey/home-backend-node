@@ -17,8 +17,12 @@
     "backend"
   ],
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mongoose": "^4.4.20"
+    "express-session": "^1.13.0",
+    "geosearch": "^0.2.8",
+    "mongoose": "^4.4.20",
+    "nconf": "^0.8.4"
   },
   "author": "Sergey Kubrey <kubrey.work@gmail.com>",
   "license": "ISC",

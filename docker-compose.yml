@@ -19,9 +19,8 @@ node:
         - "3000:3000"
     volumes:
         - ./:/home/app/homebackend
-#        - ./node_modules:/home/app/homebackend/node_modules
     environment:
-        MONGO_HOST: mongo
+        MONGO_HOST: models
         MONGO_PORT: 37017
     links:
         - mongodb

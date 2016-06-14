@@ -1,0 +1,19 @@
+{
+  "mongodb": {
+    "connection": "mongodb://172.2.0.2:27017"
+  },
+  "http": {
+    "port": 3000
+  },
+  "session": {
+    "secret": "session-secret244543",
+    "resave": false,
+    "saveUninitialized": true,
+    "cookie": {
+      "secure": false
+    }
+  },
+  "project": {
+    "name": "smart-home"
+  }
+}
