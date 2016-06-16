@@ -1,17 +1,16 @@
-#nginx:
-#    build: ./nginx/
-#    ports:
-#        - "8080:80"
-#        - "8443:443"
-#    volumes:
-#        - /etc/nginx/psw:/etc/nginx/pws
-#        - /etc/nginx/ssl:/etc/nginx/ssl
-#        - ./nginx/nginx.conf:/etc/nginx/conf.d/dock.loc
-#    environment:
-#        - DOMAIN_NAME=dock.loc
-#    links:
-#        - node
-
+nginx:
+    build: ./docker/nginx/
+    ports:
+        - "8080:80"
+        - "8443:443"
+    volumes:
+        - /etc/nginx/psw:/etc/nginx/pws
+        - /etc/nginx/ssl:/etc/nginx/ssl
+        - ./nginx/nginx.conf:/etc/nginx/conf.d/dock.loc
+    environment:
+        - DOMAIN_NAME=homenode.loc
+    links:
+        - node
 node:
     build: .
     ports:

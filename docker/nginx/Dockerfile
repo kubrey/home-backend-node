@@ -5,6 +5,8 @@ FROM nginx
 COPY entry.sh /
 ENTRYPOINT ["/entry.sh"]
 
+RUN rm -v /etc/nginx/nginx.conf
+
 # Copy custom configuration file from the current directory
 COPY nginx.conf /etc/nginx/nginx.conf
 
@@ -16,6 +18,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Expose ports
 EXPOSE 443
+EXPOSE 80
 
 # Define default command
 CMD service nginx start
