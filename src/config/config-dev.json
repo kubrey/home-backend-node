@@ -2,7 +2,11 @@
   "mongodb": {
     "connection": "mongodb://172.2.0.2:27017"
   },
-  "http": {
+  "server": {
+    "secure": false,
+    "certKey": "",
+    "certificate": "",
+    "ca": "",
     "port": 3000
   },
   "session": {
