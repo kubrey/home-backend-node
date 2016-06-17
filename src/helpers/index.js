@@ -27,6 +27,7 @@ var helper = function () {
  */
 helper.prototype.getFiles = function (dir, files_) {
     files_ = files_ || [];
+    var self = this;
     var files = fs.readdirSync(dir);
     if (!files) {
         return files_;
