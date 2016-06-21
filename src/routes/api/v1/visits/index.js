@@ -9,7 +9,6 @@ var model = require(path.join(__dirname, "../../../../models/visit"));
 
 
 router.get('/', function (req, res) {
-
     var query = model.find({});
     query.where({})
         .limit(10)

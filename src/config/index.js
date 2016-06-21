@@ -11,4 +11,10 @@ var fileObj = {file: path.join(__dirname, confFile)};
 
 nconf.use('file', fileObj);
 
+//nconf.set("project:root", path.join(__dirname, '../../'));
+//
+//nconf.save(function (err) {
+//    console.log(err);
+//});
+
 module.exports = nconf;

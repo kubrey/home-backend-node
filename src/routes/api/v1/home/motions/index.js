@@ -8,7 +8,7 @@ var HttpError = require(path.join(__dirname, '../../../../../errors')).HttpError
 
 
 router.get('/', function (req, res) {
-    res.send('sddsfdsf123');
+    res.send(config.get('project:root'));
 });
 
 router.post('/', function (req, res) {

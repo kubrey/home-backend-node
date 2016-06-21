@@ -14,10 +14,22 @@
     "resave": false,
     "saveUninitialized": true,
     "cookie": {
-      "secure": false
+      "secure": false,
+      "maxAge": 2592000000
     }
   },
   "project": {
-    "name": "smart-home"
+    "name": "smart-home",
+    "root": "/home/app/homebackend/"
+  },
+  "motion": {
+    "videos": {
+      "pathType": "relative",
+      "dir": "/motion-dev"
+    },
+    "images": {
+      "pathType": "relative",
+      "dir": "/motion-dev"
+    }
   }
 }

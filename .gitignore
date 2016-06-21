@@ -4,3 +4,4 @@
 /docker/mongodb/*
 /node_modules/*
 /mongodb/
+/motion-dev/*

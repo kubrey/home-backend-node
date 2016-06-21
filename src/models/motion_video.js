@@ -5,19 +5,16 @@ const mongoose = require(path.join(__dirname, "../libs/mongoose"));
 
 require(path.join(__dirname, "../helpers"));
 
-
-var d = new Date();
-
 var Schema = mongoose.Schema({
     ip: String,
     country: String,
     city: String,
     ua: String,
     sid: String,
-    day: {type: Date, default: d.ymd('-')},
+    day: {type: Date, default: Date.now},
     counter: {type: Number, default: 1}
 });
 
-var Visit = mongoose.model('Visit', Schema);
+var MotionVideo = mongoose.model('motion_video', Schema);
 
 module.exports = Visit;
