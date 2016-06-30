@@ -6,3 +6,5 @@
 
 const path = require('path');
 
+console.log(1);
+
