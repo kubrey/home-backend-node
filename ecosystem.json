@@ -4,6 +4,17 @@
     "name": "main handler",
     "exec_mode": "fork",
     "instances": 1,
-    "watch": ["src"]
+    "watch": [
+      "src"
+    ]
+  },
+  {
+    "script": "src/commands/motion-video.js",
+    "name": "img watch",
+    "exec_mode": "fork",
+    "instances": 1,
+    "watch": [
+      "src"
+    ]
   }
 ]

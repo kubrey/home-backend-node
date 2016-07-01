@@ -12,9 +12,10 @@ const http = require('http');
 
 const motion = require(path.join(__dirname,"libs/motion"));
 
-motion.imgWatch();
+//motion.imgWatch();
 
 var app = express();
+
 
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({extended: false}));

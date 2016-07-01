@@ -5,6 +5,8 @@
  */
 
 const path = require('path');
+const conf = require(path.join(__dirname, "../config"));
+const motion = require(path.join(__dirname,"../libs/motion"));
 
-console.log(1);
+motion.imgWatch();
 
