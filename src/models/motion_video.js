@@ -9,10 +9,14 @@ var d = new Date();
 var Schema = mongoose.Schema({
     name: String,
     path: String,
+    image: {
+        name: String,
+        type: {type: String, default: 'best'}
+    },
     day: {type: Date, default: d.ymd('-')},
     date: {type: Date, default: Date.now}
 });
 
 var MotionVideo = mongoose.model('motion_video', Schema);
 
-module.exports = Visit;
+module.exports = MotionVideo;

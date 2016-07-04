@@ -15,6 +15,8 @@ var motionVideoDir = conf.get('motion:videos:pathType') == pathTypeRel
     ? path.join(conf.get('project:root'), conf.get('motion:videos:dir'))
     : conf.get('motion:videos:dir');
 
+console.log(motionVideoDir,motionImgDir);
+
 var motion = function () {
     this.videoDir = motionVideoDir;
     this.imageDir = motionImgDir;
@@ -28,7 +30,43 @@ motion.prototype.getLastImage = function () {
 
 /**
  *
- * @param {Function} callback принимает путь к файлу
+ * @param imgFile
+ * @return {string}
+ */
+motion.prototype.matchImgWithVideo = function (imgFile) {
+    let name = path.basename(imgFile, path.extname(imgFile));
+    let parts = name.split('-');
+    parts.pop();
+
+    return parts.join('-');
+
+};
+
+/**
+ *
+ * @param file
+ * @return {String}
+ */
+motion.prototype.getEventId = function(file){
+    let name = path.basename(file, path.extname(file));
+    let parts = name.split('-');
+
+    parts.pop();
+    return parts.pop();
+};
+
+/**
+ * File format for video and images is configured in motion.conf
+ * I have YYYY-mm-dd--HH-ii-ss-$id for video
+ * and YYYY-mm-dd--HH-ii-ss-$id-$pictureId for images
+ * So image and video paths matches except the last part of image path
+ * N.B.! If video was created on 14:55:55 and lasts for more than 5 sec -> image will be created at 14:56:... minutes will not match!
+ * Image is set to be the "best picture" so it's written after video when event is over
+ */
+
+/**
+ *
+ * @param {Function} callback accept file path
  */
 motion.prototype.imgWatch = function (callback) {
     var self = this;
@@ -46,7 +84,7 @@ motion.prototype.imgWatch = function (callback) {
 
 /**
  *
- * @param callback
+ * @param {Function} callback принимает путь к файлу
  */
 motion.prototype.videoWatch = function (callback) {
     var self = this;
