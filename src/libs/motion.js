@@ -18,7 +18,7 @@ var motionVideoDir = conf.get('motion:videos:pathType') == pathTypeRel
 var motion = function () {
     this.videoDir = motionVideoDir;
     this.imageDir = motionImgDir;
-    this.allowedImgExtensions = ['.jpg', '.jpeg','.log'];
+    this.allowedImgExtensions = ['.jpg', '.jpeg', '.log'];
     this.allowedVideoExtensions = ['.avi', '.flw', '.mp4'];
 };
 
@@ -26,7 +26,11 @@ motion.prototype.getLastImage = function () {
 
 };
 
-motion.prototype.imgWatch = function () {
+/**
+ *
+ * @param {Function} callback принимает путь к файлу
+ */
+motion.prototype.imgWatch = function (callback) {
     var self = this;
     fs.watch(motionImgDir, {}, (event, file) => {
         let filePath = path.join(motionImgDir, file);
@@ -35,12 +39,26 @@ motion.prototype.imgWatch = function () {
 
         if (self.allowedImgExtensions.indexOf(path.extname(filePath)) !== -1) {
             fs.writeFile(path.join(__dirname, "../../mon1.log"), filePath);
+            callback(filePath);
         }
     });
 };
 
-motion.prototype.videoWatch = function () {
+/**
+ *
+ * @param callback
+ */
+motion.prototype.videoWatch = function (callback) {
+    var self = this;
+    fs.watch(motionVideoDir, {}, (event, file) => {
+        let filePath = path.join(motionVideoDir, file);
 
+        console.log(path.extname(filePath));
+        if (self.allowedVideoExtensions.indexOf(path.extname(filePath)) !== -1) {
+            fs.writeFile(path.join(__dirname, "../../mon1.log"), filePath);
+            callback(filePath);
+        }
+    });
 };
 
 var M = new motion();

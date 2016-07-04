@@ -4,15 +4,13 @@ const path = require('path');
 const mongoose = require(path.join(__dirname, "../libs/mongoose"));
 
 require(path.join(__dirname, "../helpers"));
+var d = new Date();
 
 var Schema = mongoose.Schema({
-    ip: String,
-    country: String,
-    city: String,
-    ua: String,
-    sid: String,
-    day: {type: Date, default: Date.now},
-    counter: {type: Number, default: 1}
+    name: String,
+    path: String,
+    day: {type: Date, default: d.ymd('-')},
+    date: {type: Date, default: Date.now}
 });
 
 var MotionVideo = mongoose.model('motion_video', Schema);
