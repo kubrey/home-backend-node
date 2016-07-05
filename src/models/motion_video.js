@@ -9,9 +9,14 @@ var d = new Date();
 var Schema = mongoose.Schema({
     name: String,
     path: String,
+    eventId: Number,
     image: {
         name: String,
         type: {type: String, default: 'best'}
+    },
+    external: {
+        url: String,
+        uploaded: {type: Date}
     },
     day: {type: Date, default: d.ymd('-')},
     date: {type: Date, default: Date.now}

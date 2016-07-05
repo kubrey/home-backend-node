@@ -16,41 +16,44 @@ const mVideo = require(path.join(__dirname, "../models/motion_video"));
  * @param file
  */
 var imgCallback = function (file) {
-    var name = path.basename(file, path.extname(file));
-    console.log(name);
-    var baseName = motion.matchImgWithVideo(file);
+    var name = path.basename(file);
     let eventId = motion.getEventId(file);
-    console.log('base name' + eventId);
     //var query = mVideo.where({name: motion.matchImgWithVideo(file)})  ;
-    mVideo.findOneAndUpdate({name: new RegExp("-" + eventId + "\.", 'i'),date:{$gt:{}}}, {
+    mVideo.findOneAndUpdate({eventId: eventId}, {
         $set: {
             image: {
-                name: name
+                name: name,
+                type: 'best'
             }
         }
-    }, (err, video)=> {
+    }, {new: true, upsert: false,sort:{date:-1}}, (err, video)=> {
         if (err) {
             console.log(err);
-        } else {
-            console.log(video);
         }
     });
 
 };
 
 var videoCallback = function (file) {
-    console.log(file);
-    var video = new mVideo({path: file, name: path.basename(file)});
-    video.save(function (err) {
-        console.log(err);
+    let eventId = motion.getEventId(file);
+    mVideo.findOneAndUpdate({path: file, eventId: eventId}, {
+        path: file,
+        name: path.basename(file),
+        eventId: eventId
+    }, {upsert: true, new: true, setDefaultsOnInsert: true}, (err, doc)=> {
+        if (err) {
+            console.log(err);
+        }
+
     });
+
 };
 
-motion.imgWatch(imgCallback);
+motion.watch(videoCallback, imgCallback);
 
-motion.videoWatch(videoCallback);
-
-//var file = '/home/app/homebackend/motion-dev/2016-07-04--08-39-31-505-04.jpg';
+//motion.videoWatch(videoCallback);
+//
+//var file = '/home/app/homebackend/motion-dev/2016-07-05--07-34-53-530-01.jpg';
 //var name = path.basename(file, path.extname(file));
 //
 //var baseName = motion.matchImgWithVideo(file);
@@ -60,7 +63,7 @@ motion.videoWatch(videoCallback);
 //    $set: {
 //        image: {
 //            name: name,
-//            type:'best'
+//            type: 'best'
 //        }
 //    }
 //}, (err, video)=> {

@@ -15,7 +15,7 @@ var motionVideoDir = conf.get('motion:videos:pathType') == pathTypeRel
     ? path.join(conf.get('project:root'), conf.get('motion:videos:dir'))
     : conf.get('motion:videos:dir');
 
-console.log(motionVideoDir,motionImgDir);
+console.log(motionVideoDir, motionImgDir);
 
 var motion = function () {
     this.videoDir = motionVideoDir;
@@ -47,11 +47,15 @@ motion.prototype.matchImgWithVideo = function (imgFile) {
  * @param file
  * @return {String}
  */
-motion.prototype.getEventId = function(file){
+motion.prototype.getEventId = function (file) {
+    let extension = path.extname(file);
     let name = path.basename(file, path.extname(file));
     let parts = name.split('-');
+    if (this.allowedImgExtensions.indexOf(extension) !== -1) {
+        //image - removing last block from file name(pictureId of YYYY-mm-dd--HH-ii-ss-$id-$pictureId)
+        parts.pop();
+    }
 
-    parts.pop();
     return parts.pop();
 };
 
@@ -73,11 +77,30 @@ motion.prototype.imgWatch = function (callback) {
     fs.watch(motionImgDir, {}, (event, file) => {
         let filePath = path.join(motionImgDir, file);
 
-        console.log(path.extname(filePath));
-
         if (self.allowedImgExtensions.indexOf(path.extname(filePath)) !== -1) {
-            fs.writeFile(path.join(__dirname, "../../mon1.log"), filePath);
+            //fs.writeFile(path.join(__dirname, "../../mon1.log"), filePath);
+            console.log("img" + filePath);
             callback(filePath);
+        }
+    });
+};
+
+/**
+ * Videos and images are in the same directory - only 1 watcher
+ * @param videoCb
+ * @param imgCb
+ */
+motion.prototype.watch = function (videoCb, imgCb) {
+    var self = this;
+    fs.watch(motionVideoDir, {}, (event, file) => {
+        let filePath = path.join(motionVideoDir, file);
+
+        if (self.allowedVideoExtensions.indexOf(path.extname(filePath)) !== -1) {
+            console.log("img " + console.log(path.extname(filePath)));
+            videoCb(filePath);
+        } else if (self.allowedImgExtensions.indexOf(path.extname(filePath)) !== -1) {
+            console.log("img " + console.log(path.extname(filePath)));
+            imgCb(filePath);
         }
     });
 };
@@ -87,13 +110,15 @@ motion.prototype.imgWatch = function (callback) {
  * @param {Function} callback принимает путь к файлу
  */
 motion.prototype.videoWatch = function (callback) {
+    console.trace('video watcher');
     var self = this;
     fs.watch(motionVideoDir, {}, (event, file) => {
         let filePath = path.join(motionVideoDir, file);
 
-        console.log(path.extname(filePath));
+
         if (self.allowedVideoExtensions.indexOf(path.extname(filePath)) !== -1) {
             fs.writeFile(path.join(__dirname, "../../mon1.log"), filePath);
+            console.log("img " + console.log(path.extname(filePath)));
             callback(filePath);
         }
     });
