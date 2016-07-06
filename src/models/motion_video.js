@@ -25,8 +25,14 @@ var Schema = mongoose.Schema({
 
 var MotionVideo = mongoose.model('motion_video', Schema);
 
-
 MotionVideo.availableSortings = ['date', '-date'];
+
+/**
+ * Преобразование документа перед выдачей на фронтенд
+ * Проверка путей и т.д.
+ * @param doc
+ * @return {*}
+ */
 MotionVideo.prepareDocument2View = function (doc) {
     return doc;
 };
