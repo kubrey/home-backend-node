@@ -50,26 +50,3 @@ var videoCallback = function (file) {
 };
 
 motion.watch(videoCallback, imgCallback);
-
-//motion.videoWatch(videoCallback);
-//
-//var file = '/home/app/homebackend/motion-dev/2016-07-05--07-34-53-530-01.jpg';
-//var name = path.basename(file, path.extname(file));
-//
-//var baseName = motion.matchImgWithVideo(file);
-//console.log('base name' + baseName);
-////var query = mVideo.where({name: motion.matchImgWithVideo(file)})  ;
-//mVideo.findOneAndUpdate({name: new RegExp(baseName, 'i')}, {
-//    $set: {
-//        image: {
-//            name: name,
-//            type: 'best'
-//        }
-//    }
-//}, (err, video)=> {
-//    if (err) {
-//        console.error(err);
-//    } else {
-//        console.log(video);
-//    }
-//});

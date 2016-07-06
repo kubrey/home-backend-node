@@ -22,6 +22,13 @@ var Schema = mongoose.Schema({
     date: {type: Date, default: Date.now}
 });
 
+
 var MotionVideo = mongoose.model('motion_video', Schema);
+
+
+MotionVideo.availableSortings = ['date', '-date'];
+MotionVideo.prepareDocument2View = function (doc) {
+    return doc;
+};
 
 module.exports = MotionVideo;
