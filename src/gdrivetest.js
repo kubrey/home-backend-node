@@ -12,26 +12,16 @@ const conf = require(path.join(__dirname,"config"));
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/drive-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_DIR = path.join(__dirname,"libs/google/credentials/");
 var TOKEN_PATH = TOKEN_DIR + 'drive-nodejs-quickstart.json';
+
+console.log(TOKEN_PATH);
 
 var appData = conf.get('google:app:file');
 
 //console.log(appData);
 
 authorize(appData, listFiles);
-
-// Load client secrets from a local file.
-//fs.readFile(path.join(__dirname,'client_secret.json'), function processClientSecrets(err, content) {
-//    if (err) {
-//        console.log('Error loading client secret file: ' + err);
-//        return;
-//    }
-//    // Authorize a client with the loaded credentials, then call the
-//    // Drive API.
-//    authorize(JSON.parse(content), listFiles);
-//});
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
