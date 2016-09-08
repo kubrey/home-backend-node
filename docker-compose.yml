@@ -8,14 +8,14 @@ nginx:
         - /etc/nginx/ssl:/etc/nginx/ssl
         - ./nginx/nginx.conf:/etc/nginx/conf.d/dock.loc
     environment:
-        - DOMAIN_NAME=homenode.loc
+        - DOMAIN_NAME=smarthome.loc
     links:
         - node
 node:
     build: .
     ports:
-        - "8800:80"
-        - "3000:3000"
+        - "8888:88"
+        - "3800:3000"
     volumes:
         - ./:/home/app/homebackend
     environment:
@@ -24,10 +24,10 @@ node:
     links:
         - mongodb
 mongodb:
-     image: mongo:3.0
-     command: " --smallfiles --quiet --logpath=/dev/null"
+     build: ./docker/mongodb/
+     #command: [" --smallfiles --quiet --logpath=/dev/null","chmod -R 0755 mongodb/journal"]
      ports:
          - "37017:27017"
-  #   command: chmod -R 0755 mongodb/journal
+     #command: chmod -R 0777 /data/db
      volumes:
          - ./mongodb:/data/db

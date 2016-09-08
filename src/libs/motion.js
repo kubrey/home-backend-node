@@ -92,6 +92,14 @@ motion.prototype.imgWatch = function (callback) {
  */
 motion.prototype.watch = function (videoCb, imgCb) {
     var self = this;
+    try {
+        let isAccessible = fs.accessSync(motionVideoDir);
+    } catch(e){
+        console.log(e.message);
+        imgCb("no.jpg");
+        return false;
+    }
+    console.log("Video dir exists: "+isAccessible);
     fs.watch(motionVideoDir, {}, (event, file) => {
         let filePath = path.join(motionVideoDir, file);
 
@@ -111,6 +119,8 @@ motion.prototype.watch = function (videoCb, imgCb) {
  */
 motion.prototype.videoWatch = function (callback) {
     console.trace('video watcher');
+    let isAccessible = fs.accessSync(motionVideoDir);
+    console.log("Video dir exists: "+isAccessible);
     var self = this;
     fs.watch(motionVideoDir, {}, (event, file) => {
         let filePath = path.join(motionVideoDir, file);
